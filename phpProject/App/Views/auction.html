@@ -1,0 +1,108 @@
+<include href="header.html" />
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h2>Title-Auction info</h2>
+            </div>
+            <div class="col" style="text-align:end;margin-top:20px;margin-right: 40px;">
+                <!-- <input type="checkbox" id="ended" name="ended" value="ended">
+                <label for="ended"> Ended Auctions Only</label> -->
+
+                <a href="ended_true">Show ended only</a> <br>
+                <a href="ended_false">Show all items</a>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="auctionItem bg-light">
+
+        <check if="{{ empty(@endedItems) }}">
+            <true>
+
+
+
+        <table class="table table-bordered">
+            <repeat group="{{ @data }}" value="{{ @item }}">
+                <tdbody>
+                    <tr>
+                        <td colspan="5"><strong><a href="items/{{ @item.id }}">{{ @item.name }}</a></strong></td>
+                    </tr>
+                    <tr>
+                        <repeat group="{{ @user }}" value="{{ @hein }}" key="{{ @key }}">
+                            <check if="{{ @item.user_id== @hein.id }} ">
+                                <td colspan="5">Sold by {{ @hein.firstname }} {{ @hein.lastname }}</td>
+                            </check>
+                        </repeat>
+                    </tr>
+                    <tr>
+                        <td colspan="5">{{ @item.description }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ @item.bidenddate}}</td>
+                        <td>{{ @item.startingbid }}</td>
+                        <td>Total Bids:</td>
+                        <!--Logged in users only-->
+                        <td>Current Bid:</td>
+                        <!--Logged in users only-->
+                    <tr>
+                        <td>Winner:</td>
+                        <!--Available for expired items only-->
+                        <td>Winner Bid:</td>
+                        <!--Available for expired items only-->
+                      
+                    </tr>
+                    <tr>
+                        <td colspan="5"></td>
+                    </tr>
+                </tdbody>
+            </repeat>
+        </table>
+      </true>
+  
+
+     <false>
+        <table class="table table-bordered">
+            <repeat group="{{ @endedItems }}" value="{{ @item }}">
+                <tdbody>
+                    <tr>
+                        <td colspan="5"><strong><a href="items/{{ @item.id }}">{{ @item.name }}</a></strong></td>
+                    </tr>
+                    <tr>
+                        <repeat group="{{ @user }}" value="{{ @hein }}" key="{{ @key }}">
+                            <check if="{{ @item.user_id== @hein.id }} ">
+                                <td colspan="5">Sold by {{ @hein.firstname }} {{ @hein.lastname }}</td>
+                            </check>
+                        </repeat>
+                    </tr>
+                    <tr>
+                        <td colspan="5">{{ @item.description }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ @item.bidenddate}}</td>
+                        <td>{{ @item.startingbid }}</td>
+                        <td>Total Bids:</td>
+                        <!--Logged in users only-->
+                        <td>Current Bid:</td>
+                        <!--Logged in users only-->
+                    <tr>
+                        <td>Winner: {{ @item.uname}}</td>
+                       <!--Available for expired items only-->
+                        <td>Winner Bid: {{ @item.maxBid}}</td>
+                      
+                    </tr>
+                    <tr>
+                        <td colspan="5"></td>
+                    </tr>
+                </tdbody>
+            </repeat>
+        </table>
+    </false>
+</check>
+</div>
+</body>
+<include href="footer.html" />
